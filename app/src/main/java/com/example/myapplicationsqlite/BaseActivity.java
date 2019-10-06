@@ -1,5 +1,6 @@
 package com.example.myapplicationsqlite;
 
+import Model.HistoryModel;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,11 +11,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.URLUtil;
+import android.webkit.WebBackForwardList;
+import android.webkit.WebHistoryItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class BaseActivity extends AppCompatActivity {
     private WebView webView;
@@ -23,7 +30,13 @@ public class BaseActivity extends AppCompatActivity {
     private Intent intent;
     private String pass;
 
+//    private ArrayAdapter<HistoryModel> adapter;
+//    private List<HistoryModel> readUser;
+//    private ListView listView;
+
     private static final String EXTRA_TEXT ="com.example.myapplicationsqlite.EXTRA_TEXT";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,20 +58,21 @@ public class BaseActivity extends AppCompatActivity {
                 Intent intent = new Intent(BaseActivity.this,MainActivity.class);
                 Bundle b = new Bundle();
                 Log.d("SearchCheck","Submit");
-                startActivity(new Intent(BaseActivity.this,MainActivity.class));
+//                startActivity(new Intent(BaseActivity.this,MainActivity.class));
                 if (onQueryTextChange(searchText)){
                     Log.d("CheckWeb",searchText);
                     if(Patterns.WEB_URL.matcher(searchText).matches()&& URLUtil.isHttpUrl(searchText)){
-                        Log.d("CheckWebCondition",searchText);
+                        Log.d("CheckWebCondition","http "+searchText);
                         webView = (WebView) findViewById(R.id.webview);
                         //make load in our app not browser app
                         webView.setWebViewClient(new WebViewClient());
                         webView.loadUrl(searchText);
-                        WebSettings webSettings = webView.getSettings();
-                        webSettings.setJavaScriptEnabled(true);
+//                        WebSettings webSettings = webView.getSettings();
+//                        webSettings.setJavaScriptEnabled(true);
                         pass = searchText;
                         Log.d("SearchCheck","input1"+pass);
 //                        startActivity(new Intent(BaseActivity.this,MainActivity.class));
+//                        insertData();
                     }
                     else{
                         Log.d("CheckWebCondition",searchText);
@@ -66,26 +80,27 @@ public class BaseActivity extends AppCompatActivity {
                         //make load in our app not browser app
                         webView.setWebViewClient(new WebViewClient());
                         webView.loadUrl("http://www.google.com/search?q="+searchText);
-                        WebSettings webSettings = webView.getSettings();
-                        webSettings.setJavaScriptEnabled(true);
+//                        WebSettings webSettings = webView.getSettings();
+//                        webSettings.setJavaScriptEnabled(true);
 //                    searchView.clearFocus();
 
                         pass = "http://www.google.com/search?q="+searchText;
                         Log.d("SearchCheck","input2"+pass);
-
+//                        insertData();
 
 //                        startActivity(new Intent(BaseActivity.this,MainActivity.class));
                     }
 //                    Log.d("SearchCheck","v1"+pass);
                     b.putString("inputLink", pass);
-
+                    Log.d("CheckWebCondition",pass+"---");
                     intent.putExtras(b);
                     startActivity(intent);
                     finish();
+                    insertData();
 //                    intent.putExtra("browserLink",pass);
 //                    startActivity(new Intent(BaseActivity.this,MainActivity.class));
-                }
 
+                }
                 return false;
             }
 
@@ -137,5 +152,16 @@ public class BaseActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void insertData(){
+        String name = pass;
+//        String pass = et_pass.getText().toString();
+//        String email = et_email.getText().toString();
+        if(!name.isEmpty()){
+            DatabaseHelper helper = new DatabaseHelper(this);
+            helper.insertUser(name);
+            finish();
+        }
     }
 }

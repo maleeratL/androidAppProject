@@ -26,13 +26,13 @@
     android:paddingTop="16dp"
     tools:context=".HistoryActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="History page"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="331dp" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="History page"-->
+<!--        tools:layout_editor_absoluteX="176dp"-->
+<!--        tools:layout_editor_absoluteY="331dp" />-->
 
     <ListView
         android:id="@+id/history_list"

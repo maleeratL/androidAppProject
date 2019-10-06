@@ -19,6 +19,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.URLUtil;
+import android.webkit.WebBackForwardList;
+import android.webkit.WebHistoryItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -96,6 +98,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             webView.loadUrl("http://www.google.com");
         }
 
+
     }
 
     @Override
@@ -112,6 +115,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         switch (view.getId()){
             case R.id.fab:
                 animateFeb();
+//                WebBackForwardList currentList = webView.copyBackForwardList();
+//                int currentSize = currentList.getSize();
+//                for(int i = 0; i < currentSize; ++i)
+//                {
+//                    WebHistoryItem item = currentList.getItemAtIndex(i);
+//                    String url = item.getUrl();
+//                    Log.d("HistoryLink", "The URL at index: " + Integer.toString(i) + " is " + url );
+//                }
                 break;
             case R.id.fab1:
                 animateFeb();
@@ -186,5 +197,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+
+    public void printBackForwardList() {
+        WebBackForwardList currentList = webView.copyBackForwardList();
+        int currentSize = currentList.getSize();
+        for(int i = 0; i < currentSize; ++i)
+        {
+            WebHistoryItem item = currentList.getItemAtIndex(i);
+            String url = item.getUrl();
+            Log.d("HistoryLink", "The URL at index: " + Integer.toString(i) + " is " + url );
+        }
+//        Intent intent=new Intent();
+//        setResult(2,intent);
+    }
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.myapplicationsqlite;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -8,14 +9,26 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
+import android.util.Patterns;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.EditorInfo;
+import android.webkit.URLUtil;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
+    private WebView webView;
+//    private Intent intent;
+//    private  String text = null;
 
     FloatingActionButton fab, fab1, fab2;
     Animation fabOpen, fabClose, rotateForward, rotateBackward;
@@ -65,6 +78,33 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 //                Toast.makeText(MainActivity.this, "Email fab clicked. Replace with your action", Toast.LENGTH_LONG).show();
 //            }
 //        });
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+//        String text = intent.getStringExtra("browserLink");
+//        Log.d("SearchCheck","pass-input"+text);
+        if(b !=null){
+            Log.d("SearchCheck","Not-null"+b.getString("inputLink"));
+            webView = (WebView) findViewById(R.id.webview);
+            //make load in our app not browser app
+            webView.setWebViewClient(new WebViewClient());
+            webView.loadUrl(b.getString("inputLink"));
+        }
+        else{
+            webView = (WebView) findViewById(R.id.webview);
+            //make load in our app not browser app
+            webView.setWebViewClient(new WebViewClient());
+            webView.loadUrl("http://www.google.com");
+        }
+
+    }
+
+    @Override
+    public void onBackPressed(){
+        if (webView.canGoBack()){
+            webView.goBack();
+        }else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -138,4 +178,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+
 }

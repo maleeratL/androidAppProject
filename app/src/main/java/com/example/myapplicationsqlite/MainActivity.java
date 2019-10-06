@@ -116,10 +116,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             case R.id.fab1:
                 animateFeb();
                 Toast.makeText(MainActivity.this, "Camera fab clicked. Replace with your action", Toast.LENGTH_LONG).show();
+                Intent launchIntent1 = getPackageManager().getLaunchIntentForPackage("com.google.android.youtube");
+                if (launchIntent1 !=null){
+                    startActivity(launchIntent1);
+                }
                 break;
             case R.id.fab2:
                 animateFeb();
                 Toast.makeText(MainActivity.this, "Email fab clicked. Replace with your action", Toast.LENGTH_LONG).show();
+                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.google.android.gm");
+                if (launchIntent !=null){
+                    startActivity(launchIntent);
+                }
                 break;
         }
     }

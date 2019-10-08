@@ -14,3 +14,5 @@ WebView myWebView = (WebView) findViewById(R.id.webview);
 myWebView.loadUrl("http://www.example.com");
 ```
 https://developer.android.com/guide/webapps/webview.html
+
+Browsing visited web history

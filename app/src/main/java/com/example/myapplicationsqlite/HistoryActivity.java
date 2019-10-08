@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.HistoryModel;
+import androidx.appcompat.app.AppCompatDelegate;
+
 public class HistoryActivity extends BaseActivity {
     private String searchText;
     private SearchView searchView;
@@ -31,6 +33,12 @@ public class HistoryActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.darktheme);
+        }
+        else{
+            setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         getSupportActionBar().setTitle("History");

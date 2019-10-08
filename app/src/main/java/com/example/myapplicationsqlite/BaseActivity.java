@@ -148,6 +148,12 @@ public class BaseActivity extends AppCompatActivity {
             Toast.makeText(this,"Search menu is clicked",Toast.LENGTH_LONG).show();
             return true;
         }
+        else if (id == R.id.app_bookmark_icon){
+            startActivity(new Intent(this,BookmarkActivity.class));
+            //updateData(); use function of update history to update info and dispaly in Bookmarks page
+            Toast.makeText(this,"Bookmarks menu is clicked",Toast.LENGTH_LONG).show();
+            return true;
+        }
 
 
 
@@ -164,4 +170,15 @@ public class BaseActivity extends AppCompatActivity {
             finish();
         }
     }
+
+//    private void updateData(String id){
+//        String name = et_name.getText().toString();
+//        String pass = et_pass.getText().toString();
+//        String email = et_email.getText().toString();
+//        if(!name.isEmpty()&&!pass.isEmpty()&&!email.isEmpty()){
+//            DatabaseHelper helper = new DatabaseHelper(this);
+//            helper.updateUser(id,name,pass,email);
+//            finish();
+//        }
+//    }
 }

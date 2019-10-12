@@ -40,6 +40,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+
+            Log.d("AliAhmed", "A In1");
+            setTheme(R.style.darktheme);
+        }
+        else{
+            setTheme(R.style.AppTheme);
+            Log.d("AliAhmed", "A In2");
+        }
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -98,6 +107,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             webView.setWebViewClient(new WebViewClient());
             webView.loadUrl("http://www.google.com");
         }
+//        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+//
+//            Log.d("AliAhmed", "B: In1");
+//            setTheme(R.style.darktheme);
+//        }
+//        else{
+//            setTheme(R.style.AppTheme);
+//            Log.d("AliAhmed", "B: In2");
+//        }
+
+
+        setTheme(R.style.darktheme);
 
 
     }

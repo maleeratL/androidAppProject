@@ -34,10 +34,13 @@ public class HistoryActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+
+            Log.d("AliAhmed", "A In1");
             setTheme(R.style.darktheme);
         }
         else{
             setTheme(R.style.AppTheme);
+            Log.d("AliAhmed", "A In2");
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);

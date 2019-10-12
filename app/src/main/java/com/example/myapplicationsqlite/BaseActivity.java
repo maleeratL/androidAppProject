@@ -29,6 +29,7 @@ public class BaseActivity extends AppCompatActivity {
     private SearchView searchView;
     private Intent intent;
     private String pass;
+    private String checkDuplicate="";
 
 //    private ArrayAdapter<HistoryModel> adapter;
 //    private List<HistoryModel> readUser;
@@ -59,10 +60,10 @@ public class BaseActivity extends AppCompatActivity {
                 Bundle b = new Bundle();
                 Log.d("SearchCheck","Submit");
 //                startActivity(new Intent(BaseActivity.this,MainActivity.class));
-                if (onQueryTextChange(searchText)){
-                    Log.d("CheckWeb",searchText);
-                    if(Patterns.WEB_URL.matcher(searchText).matches()&& URLUtil.isHttpUrl(searchText)){
-                        Log.d("CheckWebCondition","http "+searchText);
+                if (onQueryTextChange(searchText)) {
+                    Log.d("CheckWeb", searchText);
+                    if (Patterns.WEB_URL.matcher(searchText).matches() && URLUtil.isHttpUrl(searchText)) {
+                        Log.d("CheckWebCondition", "http " + searchText);
                         webView = (WebView) findViewById(R.id.webview);
                         //make load in our app not browser app
                         webView.setWebViewClient(new WebViewClient());
@@ -70,33 +71,35 @@ public class BaseActivity extends AppCompatActivity {
 //                        WebSettings webSettings = webView.getSettings();
 //                        webSettings.setJavaScriptEnabled(true);
                         pass = searchText;
-                        Log.d("SearchCheck","input1"+pass);
+                        Log.d("SearchCheck", "input1" + pass);
 //                        startActivity(new Intent(BaseActivity.this,MainActivity.class));
 //                        insertData();
-                    }
-                    else{
-                        Log.d("CheckWebCondition",searchText);
+                    } else {
+                        Log.d("CheckWebCondition", searchText);
                         webView = (WebView) findViewById(R.id.webview);
                         //make load in our app not browser app
                         webView.setWebViewClient(new WebViewClient());
-                        webView.loadUrl("http://www.google.com/search?q="+searchText);
+                        webView.loadUrl("http://www.google.com/search?q=" + searchText);
 //                        WebSettings webSettings = webView.getSettings();
 //                        webSettings.setJavaScriptEnabled(true);
 //                    searchView.clearFocus();
 
-                        pass = "http://www.google.com/search?q="+searchText;
-                        Log.d("SearchCheck","input2"+pass);
+                        pass = "http://www.google.com/search?q=" + searchText;
+                        Log.d("SearchCheck", "input2" + pass);
 //                        insertData();
 
 //                        startActivity(new Intent(BaseActivity.this,MainActivity.class));
                     }
 //                    Log.d("SearchCheck","v1"+pass);
                     b.putString("inputLink", pass);
-                    Log.d("CheckWebCondition",pass+"---");
+                    Log.d("CheckWebCondition", pass + "---");
                     intent.putExtras(b);
                     startActivity(intent);
                     finish();
-                    insertData();
+                    if (!checkDuplicate.equals(pass)){
+                        insertData();
+                        checkDuplicate=pass;
+                    }
 //                    intent.putExtra("browserLink",pass);
 //                    startActivity(new Intent(BaseActivity.this,MainActivity.class));
 
@@ -170,6 +173,7 @@ public class BaseActivity extends AppCompatActivity {
             finish();
         }
     }
+
 
 //    private void updateData(String id){
 //        String name = et_name.getText().toString();

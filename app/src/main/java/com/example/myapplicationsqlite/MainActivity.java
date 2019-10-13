@@ -104,6 +104,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             webView.setWebViewClient(new WebViewClient());
             webView.loadUrl("http://www.google.com");
         }
+
+        //get title from link
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                Log.d("getTitle",view.getTitle());
+                Log.d("getTitle",view.getUrl());
+            }
+        });
+
+//        webView.setWebViewClient(new WebViewClient());
+//        Log.d("getTitle","Main: "+webView.getTitle());
 //        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
 //
 //            Log.d("AliAhmed", "B: In1");
@@ -113,11 +125,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 //            setTheme(R.style.AppTheme);
 //            Log.d("AliAhmed", "B: In2");
 //        }
-
-
-        setTheme(R.style.darktheme);
-
-
+//        Log.d("getTitle","Main: "+webView.getTitle());
     }
 
     @Override

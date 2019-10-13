@@ -29,7 +29,9 @@ public class BaseActivity extends AppCompatActivity {
     private SearchView searchView;
     private Intent intent;
     private String pass;
+    private String nameTitle;
     private String checkDuplicate="";
+    String url;
 
 //    private ArrayAdapter<HistoryModel> adapter;
 //    private List<HistoryModel> readUser;
@@ -86,6 +88,7 @@ public class BaseActivity extends AppCompatActivity {
 
                         pass = "http://www.google.com/search?q=" + searchText;
                         Log.d("SearchCheck", "input2" + pass);
+
 //                        insertData();
 
 //                        startActivity(new Intent(BaseActivity.this,MainActivity.class));
@@ -96,6 +99,8 @@ public class BaseActivity extends AppCompatActivity {
                     intent.putExtras(b);
                     startActivity(intent);
                     finish();
+//                    nameTitle = webView.getTitle();
+//                    Log.d("getTitle",nameTitle);
                     if (!checkDuplicate.equals(pass)){
                         insertData();
                         checkDuplicate=pass;
@@ -104,6 +109,15 @@ public class BaseActivity extends AppCompatActivity {
 //                    startActivity(new Intent(BaseActivity.this,MainActivity.class));
 
                 }
+//                webView.setWebViewClient(new WebViewClient() {
+//                    @Override
+//                    public void onPageFinished(WebView view, String url) {
+//                        Log.d("getTitle",view.getTitle());
+//                    }
+//
+//                });
+
+
                 return false;
             }
 
@@ -165,7 +179,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private void insertData(){
         String name = pass;
-//        String pass = et_pass.getText().toString();
+//        String title = nameTitle;
 //        String email = et_email.getText().toString();
         if(!name.isEmpty()){
             DatabaseHelper helper = new DatabaseHelper(this);
